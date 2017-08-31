@@ -1,3 +1,6 @@
+import * as person from "./person"
+
+console.log(person);
 
 class test {
 	

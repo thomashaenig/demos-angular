@@ -12,7 +12,9 @@
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.3",
     "webpack": "^2.6.1",
-    "typescript": "^2.4.2"
+    "typescript": "^2.4.2",
+    "webpack-dev-server": "^2.7.1"
   },
-  "dependencies": {}
+  "dependencies": {
+  }
 }
