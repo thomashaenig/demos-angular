@@ -1,0 +1,15 @@
+{
+  "compileOnSave": true,
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "compilerOptions": {
+    "module": "CommonJS",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "sourceMap": false,
+    "target": "es5"
+  }
+}
