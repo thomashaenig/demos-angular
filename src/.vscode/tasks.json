@@ -1,0 +1,6 @@
+{
+	"version": "0.1.0",
+	"command": "webpack-dev-server",
+	"isShellCommand": true,
+	"echoCommand": true
+}

@@ -5,7 +5,7 @@
     "dist"
   ],
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "amd",
     "noEmitOnError": true,
     "noImplicitAny": false,
     "removeComments": false,
