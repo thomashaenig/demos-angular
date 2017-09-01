@@ -2,7 +2,10 @@ const path = require('path');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 
 module.exports = {
-	entry: './main',
+	entry: [
+		'./main',
+		'./style.less'
+	],
 	output: {
 		filename: 'bundle.js',
 		path: path.resolve(__dirname, 'dist'),		
@@ -24,11 +27,24 @@ module.exports = {
 					path.resolve(__dirname, 'node_modules')
 				],
 				loader: 'awesome-typescript-loader'
-            }			
+            },
+			{
+                test: /\.less$/,
+				exclude: [
+					path.resolve(__dirname, 'node_modules')
+				],
+				use: [{
+					loader: "style-loader"
+				},{
+					loader: "css-loader"
+				}, {
+					loader: "less-loader"
+				}]
+            }		
         ]
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.jsx']
+		extensions: ['.ts', '.tsx', '.js', '.jsx', 'html', 'less']
 	},
 	devtool: 'source-map',
 	devServer: {
