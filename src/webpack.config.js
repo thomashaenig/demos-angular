@@ -9,15 +9,23 @@ module.exports = {
 	},
 	
 	module: {
-		loaders: [
+		rules: [
+            {
+                test: /\.ts$/,
+                enforce: 'pre',
+                loader: 'tslint-loader',
+                options: {
+					emitErrors: true,
+				}
+            },
 			{
-				test: /\.tsx?$/,
+                test: /\.tsx?$/,
 				exclude: [
 					path.resolve(__dirname, 'node_modules')
 				],
 				loader: 'awesome-typescript-loader'
-			}
-		]
+            }			
+        ]
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx']

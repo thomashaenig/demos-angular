@@ -1,16 +1,16 @@
-import * as person from "./person"
+import * as person from "./person";
 
 console.log(person);
 
-class test {
-	
-	private text: string = "Hello World"
-	
+class Test {
+
+	private welcomeText: string = "Hello World es klappt mit typescript 2.5.2";
+
 	print () {
-		console.log("testoutput", this.text);
-	}	
+		console.log("testoutput", this.welcomeText);
+	}
 }
 
 
-const var1: test = new test();
+const var1: Test = new Test();
 var1.print();
