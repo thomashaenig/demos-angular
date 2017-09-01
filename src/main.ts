@@ -7,7 +7,7 @@ class test {
 	private text: string = "Hello World"
 	
 	print () {
-		console.log(this.text);
+		console.log("testoutput", this.text);
 	}	
 }
 
