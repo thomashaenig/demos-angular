@@ -40,7 +40,21 @@ module.exports = {
 				}, {
 					loader: "less-loader"
 				}]
-            }		
+            },{
+				test: /\.html$/,
+				use: [ {
+				  loader: 'html-loader',
+				  options: {
+					minimize: true
+				  }
+				}],
+			}, {
+				test: /\.(jpg|png|svg)$/,
+				loader: 'url-loader',
+				options: {
+				  	limit: 25000,
+				},
+			}
         ]
 	},
 	resolve: {
