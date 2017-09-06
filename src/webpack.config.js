@@ -8,9 +8,8 @@ module.exports = {
 	],
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'dist'),		
+		path: path.resolve(__dirname, 'dist')
 	},
-	
 	module: {
 		rules: [
             {
@@ -40,15 +39,7 @@ module.exports = {
 				}, {
 					loader: "less-loader"
 				}]
-            },{
-				test: /\.html$/,
-				use: [ {
-				  loader: 'html-loader',
-				  options: {
-					minimize: true
-				  }
-				}],
-			}, {
+            }, {
 				test: /\.(jpg|png|svg)$/,
 				loader: 'url-loader',
 				options: {
@@ -58,7 +49,7 @@ module.exports = {
         ]
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.jsx', 'html', 'less']
+		extensions: ['.ts', '.tsx', '.js', '.jsx', 'less']
 	},
 	devtool: 'source-map',
 	devServer: {

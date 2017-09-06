@@ -15,9 +15,10 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
 
+    
   </head>
 
-  <body id="page-top">
+  <body id="page-top" ng-app="app">
     
     <!-- Navigation -->
     <nav class="mainNav navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -86,7 +87,7 @@
     </section>
 
     <!-- Selector -->
-    <section id="selector" class="content-section text-center">
+    <section id="selector" class="content-section text-center" ng-controller="SelectorCtrl">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
@@ -105,15 +106,17 @@
     </footer>
 
     
-    <script src="bundle.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="lib/vendor/jquery/jquery.min.js"></script>
     <script src="lib/vendor/popper/popper.min.js"></script>
     <script src="lib/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="lib/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    
+    <script src="bundle.js"></script>
     
     <!-- Custom scripts for this template -->
     <script>
