@@ -1,16 +1,24 @@
-import * as person from "./person";
+import { person } from "./person";
+import * as angular from "angular";
+import * as template from "text!./test.html";
 
-console.log(person);
+let app = angular.module("app",[]);
 
-class Test {
+class DataApp {
 
-	private welcomeText: string = "Hello World es klappt mit typescript 2.5.2 zum zweiten";
+	constructor() {
+		console.log("init of DataApp Service", person);
+	}
 
-	print () {
-		console.log("testoutput", this.welcomeText);
+}
+
+class SelectorCtrl {
+
+	constructor() {
+		console.log("init of Selector Controller", template);
 	}
 }
 
+app.factory("HalyardData", DataApp);
 
-const var1: Test = new Test();
-var1.print();
+app.controller("SelectorCtrl", SelectorCtrl);

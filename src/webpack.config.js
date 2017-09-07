@@ -4,14 +4,21 @@ const { CheckerPlugin } = require('awesome-typescript-loader');
 module.exports = {
 	entry: [
 		'./main',
-		'./style.less'
+		"./style.less"
 	],
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'dist'),		
+		path: path.resolve(__dirname, 'dist')
+	},
+
+	resolveLoader:{		 
+		alias: {
+			text: "raw-loader"
+		}
 	},
 	
 	module: {
+		
 		rules: [
             {
                 test: /\.ts$/,
@@ -20,7 +27,7 @@ module.exports = {
                 options: {
 					emitErrors: true,
 				}
-            },
+			},		
 			{
                 test: /\.tsx?$/,
 				exclude: [
@@ -40,11 +47,17 @@ module.exports = {
 				}, {
 					loader: "less-loader"
 				}]
-            }		
+            }, {
+				test: /\.(jpg|png|svg)$/,
+				loader: 'url-loader',
+				options: {
+				  	limit: 25000,
+				},
+			}
         ]
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.jsx', 'html', 'less']
+		extensions: ['.ts', '.tsx', '.js', '.jsx', 'less']
 	},
 	devtool: 'source-map',
 	devServer: {
@@ -54,6 +67,5 @@ module.exports = {
 	},
 	plugins: [
 		new CheckerPlugin()
-	]
-	
+	]	
 };

@@ -1,6 +1,7 @@
 {
-  "name": "MashupExample",
-  "version": "0.0.1",
+  "name": "mashupexample",
+  "private": true,
+  "version": "0.0.3",
   "description": "Example",
   "main": "index.js",
   "scripts": {
@@ -10,17 +11,26 @@
   "author": "q2g",
   "license": "MIT",
   "devDependencies": {
+    "@types/angular": "^1.6.32",
+    "@types/requirejs": "^2.1.31",
     "awesome-typescript-loader": "^3.2.3",
+    "css-loader": "^0.28.7",
+    "file-loader": "^0.11.2",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "loader-utils": "^1.1.0",
+    "style-loader": "^0.18.2",
     "tslint": "^5.7.0",
     "tslint-loader": "^3.5.3",
     "typescript": "^2.5.2",
+    "url-loader": "^0.5.9",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.7.1",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.5"
+    "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
-    "css-loader": "^0.28.7",
-    "style-loader": "^0.18.2"
+    "angular": "^1.6.6",
+    "enigma.js": "^2.0.2",
+    "raw-loader": "^0.5.1",
+    "requirejs": "^2.3.5"
   }
 }
