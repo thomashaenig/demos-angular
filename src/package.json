@@ -30,7 +30,9 @@
   "dependencies": {
     "angular": "^1.6.6",
     "enigma.js": "^2.0.2",
+    "extract-text-webpack-plugin": "^2.1.2",
     "raw-loader": "^0.5.1",
-    "requirejs": "^2.3.5"
+    "requirejs": "^2.3.5",
+    "webpack-stream": "^4.0.0"
   }
 }
