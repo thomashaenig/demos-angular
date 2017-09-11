@@ -1,12 +1,21 @@
 declare module "enigma.js"
 {
-    const e: enigmaJS.enigma;
-    export = e;
+    const e: enigmaJS.IEnigmaJSClass;
+    export = e;    
 }
 
-declare namespace enigmaJS {
+declare namespace enigmaJS {    
 
-type MixinType ="Doc"| "GenericObject"| "GenericBookmark" | string;
+    interface IEnigmaJSClass {
+        /**
+         * Create a session object.
+         * @returns {ISession} - Returns a session.
+         * Note: See Configuration for the configuration options.      
+         */
+        create(congfig: IConfig): ISession;
+    }
+     
+    type MixinType ="Doc"| "GenericObject"| "GenericBookmark" | string;
 
     interface IMixin {
         /**
@@ -79,15 +88,6 @@ type MixinType ="Doc"| "GenericObject"| "GenericBookmark" | string;
          */
         protocol?:any;
       
-    }
-
-    interface enigma {
-        /**
-         * Create a session object.
-         * @returns {ISession} - Returns a session.
-         * Note: See Configuration for the configuration options.      
-         */
-        create(congfig: IConfig): ISession;
     }
 
     interface ISession {
