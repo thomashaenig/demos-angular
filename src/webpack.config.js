@@ -1,7 +1,10 @@
 const path = require('path');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
+const extractLess = new ExtractTextPlugin({
+    filename: "[name].css",
+    disable: process.env.NODE_ENV === "development"
+});
 
 // var webpackStream = require( 'webpack-stream' );
 
@@ -46,21 +49,19 @@ module.exports = {
 			},
 			{
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
-            }
-			// {
-            //     test: /\.less$/,
-			// 	exclude: [
-			// 		path.resolve(__dirname, 'node_modules')
-			// 	],
-			// 	use: [{
-			// 		loader: "style-loader"
-			// 	},{
-			// 		loader: "css-loader"
-			// 	}, {
-			// 		loader: "less-loader"
-			// 	}]
-			// }
+				exclude: [
+					path.resolve(__dirname, 'node_modules')
+				],
+				use: extractLess.extract({
+					use: [{
+						loader: "css-loader"
+					}, {
+						loader: "less-loader"
+					}],
+					// use style-loader in development
+					fallback: "style-loader"
+				})
+			}
 			, {
 				test: /\.(jpg|png|svg)$/,
 				loader: 'url-loader',
@@ -81,6 +82,6 @@ module.exports = {
 	},
 	plugins: [
 		new CheckerPlugin(),
-		new ExtractTextPlugin("[name].css")
+		extractLess
 	]	
 };
