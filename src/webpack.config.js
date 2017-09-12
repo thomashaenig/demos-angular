@@ -6,31 +6,20 @@ const extractLess = new ExtractTextPlugin({
     disable: process.env.NODE_ENV === "development"
 });
 
-// var webpackStream = require( 'webpack-stream' );
-
-
-// webpackStream(config, require('webpack'));
-
-
-
 module.exports = {
 	entry: [
 		'./main',
-		'./style'
-	],
+		'./style'],
+
 	output: {
 		filename: '[name].js',
-		path: path.resolve(__dirname, 'dist')
-	},
+		path: path.resolve(__dirname, 'dist')},
 
 	resolveLoader:{		 
 		alias: {
 			text: "raw-loader"
-		}
-	},
-	
-	module: {
-		
+		}},	
+	module: {		
 		rules: [
             {
                 test: /\.ts$/,
@@ -69,19 +58,14 @@ module.exports = {
 				  	limit: 25000,
 				},
 			}
-        ]
-	},
+        ]},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.jsx', '.less']
-	},
-	
+		extensions: ['.ts', '.tsx', '.js', '.jsx', '.less']},	
 	devServer: {
 		contentBase: path.join(__dirname, "./"),
 		compress: true,
-		port: 8080
-	},
+		port: 8080},
 	plugins: [
 		new CheckerPlugin(),
-		extractLess
-	]	
+		extractLess]
 };
