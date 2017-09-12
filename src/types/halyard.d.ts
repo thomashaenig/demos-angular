@@ -87,4 +87,39 @@ declare namespace Halyard {
      */
     getItems(): [any];
    }
+
+   class Table {
+    
+        /**
+         * A table is the representation of a table/flatfil from a data source.
+         * 
+         * let table = new Halyard.Table(JSON.parse(data), "Car Makers");
+     
+    
+    
+         * @param connection - The first parameter is the data source, and the second parameter is the options JSON or the table name.
+         *                     The connection parameter can be implicitly created by providing the data/path/url to the source that should be loaded.
+         * @param options - second parameter is the options JSON or the table name.
+         *                  Optional parameter. Can be either the table name as a String, or the following structure:
+         *                  Property	Type	        Description
+         *                  name	    String	        The name of the table
+         *                  prefix	    String	        The script prefix function to be used before the load statement
+         *                  fields	    Array of Fields	See Field definition below. If no fields are specified then all will be loaded from the source's first table or if specified from srcTable.
+         *                  delimiter	String	        The character that delimits a CSV file
+         *                  headerRowNr	Number	        The location of the header row
+         *                  srcTable	String	        The name of the table in the source file. IE: this could be the sheet name in XLSX.
+         *                  section	    String	        The name of the script section. If left empty the script is appended to the previous script section
+         */
+        constructor(connection: string, options?: string | any);
+    
+        /**
+         * Returns the script needed to load the table based on the connection and the options provided.
+         */
+        getScript(): [any];
+
+        /**
+         * Returns the connection used in the table.
+         */
+        getFieldList(): [any];
+       }
 }

@@ -28,7 +28,7 @@ module.exports = {
                 options: {
 					emitErrors: true,
 				}
-			},		
+			},
 			{
                 test: /\.tsx?$/,
 				exclude: [
