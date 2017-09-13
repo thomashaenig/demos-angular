@@ -19,6 +19,71 @@ class RootCtrl {
 	private session: enigmaJS.ISession;
 	private app: EngineAPI.IApp;
 
+
+	private configObject: EngineAPI.IGenericObjectProperties = {
+		qInfo: {
+			qType: "visualization",
+			qId: "",
+		},
+		type: "q2g-ext-selector",
+		labels: true,
+		qHyperCubeDef: {
+			qDimensions: [{
+				qDef: {
+					qFieldDefs: ["Is Highlight"],
+					qSortCriterias: [{
+						qSortByAscii: 1,
+					}],
+				},
+			}, {
+				qDef: {
+					qFieldDefs: ["Is Public Domain"],
+					qSortCriterias: [{
+						qSortByAscii: 1,
+					}],
+				},
+			}, {
+				qDef: {
+					qFieldDefs: ["Title"],
+					qSortCriterias: [{
+						qSortByAscii: 1,
+					}],
+				},
+			}, {
+				qDef: {
+					qFieldDefs: ["Medium"],
+					qSortCriterias: [{
+						qSortByAscii: 1,
+					}],
+				},
+			}, {
+				qDef: {
+					qFieldDefs: ["Department"],
+					qSortCriterias: [{
+						qSortByAscii: 1,
+					}],
+				},
+			}, {
+				qDef: {
+					qFieldDefs: ["Classification"],
+					qSortCriterias: [{
+						qSortByAscii: 1,
+					}],
+				},
+			}],
+			qInitialDataFetch: [{ qTop: 0, qHeight: 0, qLeft: 0, qWidth: 0 }],
+			qSuppressZero: false,
+			qSuppressMissing: true,
+
+		},
+		properties: {
+			shortcutFocusDimensionList: "strg + alt + 70",
+			shortcutFocusValueList: "strg + alt + 87",
+			shortcutFocusSearchField: "strg + alt + 83",
+			shortcutClearSelection: "strg + alt + 76"
+		}
+	};
+
 	constructor() {
 		console.log("init of S elector Controller");
 
@@ -33,11 +98,14 @@ class RootCtrl {
 		this.session.on("traffic:received", data => console.log("received:", data));
 
 		this.session.open()
+			// create session App
 			.then((global: EngineAPI.IGlobal) => {
 
 				return global.createSessionApp();
+			// create connection
 			}).then((app: EngineAPI.IApp) => {
 				this.app = app;
+
 				let connectionParams: any;
 				connectionParams = {
 					qName: "data",
@@ -47,6 +115,7 @@ class RootCtrl {
 				};
 
 				return app.createConnection(connectionParams);
+			// create load script
 			}).then((connectoinId:string) => {
 				console.log("connectoinId", connectoinId);
 
@@ -85,16 +154,27 @@ class RootCtrl {
 						"[Repository]" +
 					"FROM [lib://data/MetObjects.csv]" +
 					"(txt, utf8, embedded labels, delimiter is ';', msq);");
+			// reload app
 			}).then(() => {
 
 				return this.app.doReload();
+			// create hyper cube
 			}).then(() => {
-				console.log("app", this.app);
-
-				return this.app.evaluate("sum(Title)");
+				return this.app.createSessionObject(this.configObject);
+			}).then((object: EngineAPI.IGenericObject) => {
+				return object.getLayout();
 			}).then((res) => {
-			console.log(res);
+				console.log(res);
 			});
+
+			// .then(() => {
+			// 	console.log("app", this.app);
+
+			// 	return this.app.evaluate("sum(Title)");
+			// }).then((res) => {
+			// console.log(res);
+
+			// });
 	}
 }
 
