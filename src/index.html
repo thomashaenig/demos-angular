@@ -100,7 +100,14 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Selector Extension</h2>
-            <q2g-selection-extension style="height:400px" engineroot="vm.engineRoot" class="q2g-selection" ng-mouseenter="vm.setGlobalScrollFalse()" ng-mouseleave="vm.setGlobalScrollTrue()">
+            <div ng-show="vm.loadToggle">
+              <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+              </div>
+            </div>
+            <q2g-selection-extension ng-show="!vm.loadToggle" style="height:400px" engineroot="vm.engineRoot" class="q2g-selection" ng-mouseenter="vm.setGlobalScrollFalse()" ng-mouseleave="vm.setGlobalScrollTrue()">
             </q2g-selection-extension>
           </div>
         </div>

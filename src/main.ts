@@ -106,6 +106,7 @@ class RootCtrl {
 	};
 	public engineRoot: any;
 	public test: string = "Hallo";
+	public loadToggle: boolean = true;
 
 
 	static $inject = ["$timeout"];
@@ -193,7 +194,7 @@ class RootCtrl {
 				this.engineRoot = object;
 				return object.getLayout();
 			}).then((res) => {
-				console.log(res);
+				this.loadToggle = false;
 			});
 
 			// .then(() => {
