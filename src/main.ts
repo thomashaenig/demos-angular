@@ -139,7 +139,7 @@ class RootCtrl {
 				connectionParams = {
 					qName: "data",
 					qMeta: {},
-					qConnectionString: "https://raw.githubusercontent.com/thomashaenig/demos-angular/master/src/data/MetObjectsLarge.csv",
+					qConnectionString: "https://raw.githubusercontent.com/thomashaenig/demos-angular/master/src/data/MetObjects.csv",
 					qType: "internet"
 				};
 

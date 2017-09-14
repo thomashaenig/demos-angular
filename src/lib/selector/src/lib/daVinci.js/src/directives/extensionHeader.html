@@ -29,7 +29,7 @@
                             ng-if="vm.popOverList.length>0">
                             <button class="lui-fade-button"
                                     title="Selection menu"
-                                    ng-click="vm.showPopoverMenu = !vm.showPopoverMenu;">
+                                    ng-click="vm.showPopoverMenu = !vm.showPopoverMenu;" style="color: #ffffff">
                                 <span class="lui-button__icon lui-icon lui-icon--more"></span>
                             </button>
                         </td>
@@ -40,7 +40,7 @@
                                  ng-click="item.isEnabled || vm.callbackMainMenuButton({item: item.name})"                                        
                                  ng-attr-title="{{item.name}}">
                                 <button ng-class="{'lui-fade-button': item.type.length===0, 'lui-button': item.type.length>0, 'lui-disabled': item.isEnabled}"
-                                        class="lui-button--{{item.type}}">
+                                        class="lui-button--{{item.type}}" style="color: #ffffff">
                                     <span class="lui-button__icon lui-icon lui-icon--{{item.icon}}"></span>
                                 </button>
                             </div>

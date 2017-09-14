@@ -814,14 +814,14 @@ export function SelectionsDirectiveFactory(rootNameSpace: string): ng.IDirective
                 engineroot: "<"
             },
             compile: ():void => {
-                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace, ListViewDirectiveFactory(rootNameSpace),
-                    "Listview");
-                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace, ScrollBarDirectiveFactory(rootNameSpace),
-                    "ScrollBar");
+                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
+                    ListViewDirectiveFactory(rootNameSpace), "Listview");
+                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
+                    ScrollBarDirectiveFactory(rootNameSpace), "ScrollBar");
                 utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
                     StatusTextDirectiveFactory(rootNameSpace),"StatusText");
-                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace, ShortCutDirectiveFactory(rootNameSpace),
-                    "Shortcut");
+                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
+                    ShortCutDirectiveFactory(rootNameSpace), "Shortcut");
                 utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
                     IdentifierDirectiveFactory(rootNameSpace), "AkquinetIdentifier");
                 utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
