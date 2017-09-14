@@ -1,7 +1,7 @@
 {
   "name": "davinci.js",
   "version": "0.0.3",
-  "author": "Thomas Häning, Konrad Mattheis (qlik2go) ",
+  "author": "Thomas Hï¿½ning, Konrad Mattheis (qlik2go) ",
   "devDependencies": {
     "@types/angular": "1.6.27",
     "@types/jquery": "2.0.34",

@@ -1,6 +1,5 @@
 ## Typescript q2g
 *.map
-*.css
 
 node_modules/
 dist/

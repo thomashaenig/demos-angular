@@ -1,10 +1,7 @@
 const path = require('path');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractLess = new ExtractTextPlugin({
-    filename: "[name].css",
-    disable: process.env.NODE_ENV === "development"
-});
+const extractLess = new ExtractTextPlugin("[name].css");
 
 module.exports = {
 	entry: [
@@ -27,7 +24,7 @@ module.exports = {
                 enforce: 'pre',
                 loader: 'tslint-loader',
                 options: {
-					emitErrors: true,
+					emitErrors: false,
 				}
 			},
 			{
@@ -55,8 +52,8 @@ module.exports = {
 					// use style-loader in development
 					fallback: "style-loader"
 				})
-			}
-			, {
+			},
+			{
 				test: /\.(jpg|png|svg)$/,
 				loader: 'url-loader',
 				options: {
