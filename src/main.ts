@@ -6,9 +6,7 @@ import * as enigma from "enigma.js";
 import * as WebSocket from "ws";
 import * as customMixin from "./customMixin";
 
-const q2g_ext_selectorDirective = require("./lib/q2g-ext-selectorDirective.js");
-
-console.log(q2g_ext_selectorDirective);
+const q2g_ext_selectorDirective = require("./lib/selector/src/q2g-ext-selectorDirective");
 
 // let enigmaMixin = require("./node_modules/halyard.js/dist/halyard-enigma-mixin.js");
 let qixSchema = require("./node_modules/enigma.js/schemas/12.20.0.json");
