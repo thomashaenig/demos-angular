@@ -107,7 +107,7 @@ class RootCtrl {
 	public engineRoot: any;
 	public test: string = "Hallo";
 	public loadToggle: boolean = true;
-
+	public sum: string = "0";
 
 	static $inject = ["$timeout"];
 
@@ -192,19 +192,13 @@ class RootCtrl {
 				return this.app.createSessionObject(this.configObject);
 			}).then((object: EngineAPI.IGenericObject) => {
 				this.engineRoot = object;
+				object.on("changed", () => {
+				this.calcData();
+				});
 				return object.getLayout();
 			}).then((res) => {
 				this.loadToggle = false;
 			});
-
-			// .then(() => {
-			// 	console.log("app", this.app);
-
-			// 	return this.app.evaluate("sum(Title)");
-			// }).then((res) => {
-			// console.log(res);
-
-			// });
 	}
 
 	public setGlobalScrollFalse() {
@@ -213,6 +207,14 @@ class RootCtrl {
 
 	public setGlobalScrollTrue() {
 		$("body").css("overflow", "auto");
+	}
+
+	public calcData() {
+		this.app.evaluate("count([Object ID])")
+			.then((res) => {
+				console.log(res);
+				this.sum = res;
+			});
 	}
 }
 
