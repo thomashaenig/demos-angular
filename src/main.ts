@@ -140,8 +140,8 @@ class RootCtrl {
 				connectionParams = {
 					qName: "data",
 					qMeta: {},
-					qConnectionString: "C:\\Users\\thaenig\\Documents\\demos-angular\\src\\data",
-					qType: "folder"
+					qConnectionString: "https://raw.githubusercontent.com/thomashaenig/demos-angular/master/src/data/MetObjects.csv",
+					qType: "internet"
 				};
 
 				return app.createConnection(connectionParams);
