@@ -365,7 +365,7 @@ class SelectionsController implements ng.IController {
         this.menuListValues.push({
             type: "",
             isVisible: true,
-            isEnabled: true,
+            isEnabled: false,
             icon: "clear-selections",
             name: "clear",
             hasSeparator: false
