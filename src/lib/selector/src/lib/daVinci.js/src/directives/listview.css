@@ -1,0 +1,62 @@
+﻿.q2glistview {
+  position: relative;
+  width: 100%;
+  overflow-y: hidden;
+}
+.q2glistview ul {
+  width: 100%;
+  overflow: hidden;
+  padding: 0px;
+}
+.q2glistview ul li {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 1.5px solid #ffffff;
+  padding-bottom: 0.5px;
+  border-bottom: 1px solid #d9d9d9;
+  padding-left: 5px;
+  vertical-align: central;
+  display: -webkit-box;
+  -webkit-box-align: center;
+  height: 32px;
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.q2glistview ul .selected {
+  background-color: #52CC52;
+  color: #ffffff;
+  border-color: #52CC52;
+  border-bottom: 1px solid #ffffff;
+}
+.q2glistview ul .alternative {
+  background-color: #dddddd;
+  color: #595959;
+  border-color: #dddddd;
+  border-bottom: 1px solid #ffffff;
+}
+.q2glistview ul .optional {
+  background-color: #ffffff;
+  color: #595959;
+  border-color: #ffffff;
+  border-bottom: 1px solid #d9d9d9;
+}
+.q2glistview ul .excluded {
+  background-color: #A9A9A9;
+  color: #ffffff;
+  border-color: #A9A9A9;
+  border-bottom: 1px solid #ffffff;
+}
+.q2glistview ul .list-element-focussed {
+  padding-bottom: 0px;
+  border: 1.5px solid black;
+}
+.q2glistview .invisibleOutput {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
