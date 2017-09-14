@@ -8,6 +8,8 @@ import * as customMixin from "./customMixin";
 
 const q2g_ext_selectorDirective = require("./lib/selector/src/q2g-ext-selectorDirective");
 
+import * as registration from "./lib/selector/src/lib/daVinci.js/src/services/registration";
+
 // let enigmaMixin = require("./node_modules/halyard.js/dist/halyard-enigma-mixin.js");
 let qixSchema = require("./node_modules/enigma.js/schemas/12.20.0.json");
 
@@ -32,8 +34,6 @@ app.config(function (
 app.service("$registrationProvider", function () {
     return providerClass;
 });
-
-
 
 class RootCtrl {
 
@@ -105,7 +105,6 @@ class RootCtrl {
 		}
 	};
 	public engineRoot: any;
-	public test: string = "Hallo";
 	public loadToggle: boolean = true;
 	public sum: string = "0";
 
@@ -193,7 +192,7 @@ class RootCtrl {
 			}).then((object: EngineAPI.IGenericObject) => {
 				this.engineRoot = object;
 				object.on("changed", () => {
-				this.calcData();
+					this.calcData();
 				});
 				return object.getLayout();
 			}).then((res) => {

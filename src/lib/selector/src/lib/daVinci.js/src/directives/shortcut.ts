@@ -193,12 +193,16 @@ class ShortCutController implements ng.IController {
         //#endregion
 
         this.keyDownFunction = (e: JQueryKeyEventObject) => {
+
             this.keydownHandler(e);
         };
+        // console.log("THIS",this.keyDownFunction)
+        // console.log("THIS",this.shortcut)
 
-        if (this.shortcut) {
+        // if (this.shortcut) {
+            console.log("BINDING");
             $(document).on("keydown", this.keyDownFunction);
-        }
+        // }
     }
 
     /**
@@ -278,6 +282,8 @@ class ShortCutController implements ng.IController {
     private keydownHandler(event: JQueryKeyEventObject) {
         this.logger.debug("Function keyDownHandler", this.shortcutObject);
 
+        console.log("Function keyDownFunction");
+
         for (let shortcut of this.shortcutObject) {
             if (this.checkShortcutsEqual(this.getArrayInsertetShortcut(shortcut.shortcut), this.getArrayKeydownShortcut(event))) {
                 if (shortcut.preventdefault) {
@@ -305,6 +311,7 @@ class ShortCutController implements ng.IController {
      */
     private runAction(objectShortcut: IShortcutObject, event?: JQueryKeyEventObject): void {
         this.logger.debug("Function runAction", objectShortcut);
+        console.log("RUNACTION");
 
         try {
 
