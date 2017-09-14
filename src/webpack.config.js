@@ -17,7 +17,8 @@ module.exports = {
 
 	resolveLoader:{		 
 		alias: {
-			text: "raw-loader"
+			text: "raw-loader",
+			css: "css-loader"
 		}},	
 	module: {		
 		rules: [
@@ -36,6 +37,10 @@ module.exports = {
 				],
 				loader: 'awesome-typescript-loader'
 			},
+			{
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader?name=public/fonts/[name].[ext]'
+            },
 			{
                 test: /\.less$/,
 				exclude: [

@@ -4,13 +4,38 @@ import * as angular from "angular";
 import * as blubird from "bluebird";
 import * as enigma from "enigma.js";
 import * as WebSocket from "ws";
+import * as customMixin from "./customMixin";
 
+const q2g_ext_selectorDirective = require("./lib/q2g-ext-selectorDirective.js");
 
+console.log(q2g_ext_selectorDirective);
 
 // let enigmaMixin = require("./node_modules/halyard.js/dist/halyard-enigma-mixin.js");
 let qixSchema = require("./node_modules/enigma.js/schemas/12.20.0.json");
 
 let app = angular.module("app",[]);
+let providerClass: any = {};
+
+app.config(function (
+	$controllerProvider: ng.IControllerProvider,
+	$compileProvider: ng.ICompileProvider,
+	$filterProvider: ng.IFilterProvider,
+	$provide: ng.auto.IProvideService) {
+		providerClass = {
+			controller: $controllerProvider.register,
+			directive: $compileProvider.directive,
+			filter: $filterProvider.register,
+			factory: $provide.factory,
+			service: $provide.service
+		};
+	}
+);
+
+app.service("$registrationProvider", function () {
+    return providerClass;
+});
+
+
 
 class RootCtrl {
 
@@ -18,8 +43,6 @@ class RootCtrl {
 	private enigmaConfig: enigmaJS.IConfig;
 	private session: enigmaJS.ISession;
 	private app: EngineAPI.IApp;
-
-
 	private configObject: EngineAPI.IGenericObjectProperties = {
 		qInfo: {
 			qType: "visualization",
@@ -83,19 +106,26 @@ class RootCtrl {
 			shortcutClearSelection: "strg + alt + 76"
 		}
 	};
+	public engineRoot: any;
+	public test: string = "Hallo";
 
-	constructor() {
-		console.log("init of S elector Controller");
+
+	static $inject = ["$timeout"];
+
+	constructor(timeout: ng.ITimeoutService) {
+		console.log("init of S elector Controller", timeout);
 
 		this.enigmaConfig = {
 			Promise: blubird,
 			schema: qixSchema,
-			// mixins: enigmaMixin,
+			mixins: [customMixin.exposeAppApi],
 			url: "ws://localhost:9076/app/engineData"
 		};
 		this.session = enigma.create(this.enigmaConfig);
 		this.session.on("traffic:sent", data => console.log("sent:", data));
-		this.session.on("traffic:received", data => console.log("received:", data));
+		this.session.on("traffic:received", () => {
+			timeout();
+		});
 
 		this.session.open()
 			// create session App
@@ -162,6 +192,7 @@ class RootCtrl {
 			}).then(() => {
 				return this.app.createSessionObject(this.configObject);
 			}).then((object: EngineAPI.IGenericObject) => {
+				this.engineRoot = object;
 				return object.getLayout();
 			}).then((res) => {
 				console.log(res);
@@ -176,6 +207,15 @@ class RootCtrl {
 
 			// });
 	}
+
+	public setGlobalScrollFalse() {
+		$("body").css("overflow", "hidden");
+	}
+
+	public setGlobalScrollTrue() {
+		$("body").css("overflow", "auto");
+	}
 }
 
+app.directive("q2gSelectionExtension", q2g_ext_selectorDirective.SelectionsDirectiveFactory("Selectionextension"));
 app.controller("RootCtrl", RootCtrl);

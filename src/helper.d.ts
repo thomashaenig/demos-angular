@@ -5,3 +5,4 @@ declare module "text!*" {
 declare module "ws" {
     var e: string; export = e;
 }
+

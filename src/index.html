@@ -17,6 +17,12 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
 
+    <link href="lib/q2g-ext-selector.css" rel="stylesheet">    
+    <link href="lib/lib/daVinci.js/src/directives/extensionHeader.css" rel="stylesheet">  
+    <link href="lib/lib/daVinci.js/src/directives/listview.css" rel="stylesheet">  
+    <link href="lib/lib/daVinci.js/src/directives/scrollBar.css" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="node_modules/leonardo-ui/dist/leonardo-ui.css" type="text/css"/>
     
   </head>
 
@@ -89,12 +95,13 @@
     </section>
 
     <!-- Selector -->
-    <section id="selector" class="content-section text-center" ng-controller="RootCtrl">
+    <section id="selector" class="content-section text-center" ng-controller="RootCtrl as vm">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Selector Extension</h2>
-            
+            <q2g-selection-extension style="height:400px" engineroot="vm.engineRoot" class="q2g-selection" ng-mouseenter="vm.setGlobalScrollFalse()" ng-mouseleave="vm.setGlobalScrollTrue()">
+            </q2g-selection-extension>
           </div>
         </div>
       </div>
@@ -116,6 +123,7 @@
 
     <!-- Plugin JavaScript -->
     <script src="node_modules/jquery.easing/jquery.easing.min.js"></script>
+    <script src="node_modules/leonardo-ui/dist/leonardo-ui.js" type="text/javascript"></script>
 
     
     <script src="main.js"></script>
