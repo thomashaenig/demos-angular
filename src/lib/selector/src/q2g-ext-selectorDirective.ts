@@ -794,6 +794,10 @@ class SelectionsController implements ng.IController {
         this.useReadebility = properties.useAccessibility;
 
     }
+
+    callbackMainMenuButton(data: string) {
+        console.log(data);
+    }
 }
 
 export function SelectionsDirectiveFactory(rootNameSpace: string): ng.IDirectiveFactory {
