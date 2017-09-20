@@ -1,4 +1,7 @@
-﻿.q2gExtensionHeader .header tr,
+﻿.q2gExtensionHeader .header{
+  width: 100%
+}
+.q2gExtensionHeader .header tr,
 .q2gExtensionHeader .header td {
   height: 42px;
   vertical-align: middle;
