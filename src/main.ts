@@ -101,7 +101,10 @@ class RootCtrl {
 			shortcutFocusDimensionList: "strg + alt + 70",
 			shortcutFocusValueList: "strg + alt + 87",
 			shortcutFocusSearchField: "strg + alt + 83",
-			shortcutClearSelection: "strg + alt + 76"
+			shortcutClearSelection: "strg + alt + 76",
+			aria: {
+				useAccessibility: false
+			}
 		}
 	};
 	public engineRoot: any;
