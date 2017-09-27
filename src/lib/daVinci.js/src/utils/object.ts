@@ -13,6 +13,14 @@ let logger = new Logging.Logger("q2gListAdapter");
 interface Iq2gIListObject extends Event {
     getDataPage: (top: number, height: number) => Promise<any>;
     searchFor: (searchString: string) => Promise<any>;
+    acceptListObjectSearch: (toggelMode: boolean) => Promise<boolean>;
+}
+
+interface ICollection {
+    status: string;
+    id: Array<number>;
+    defs: Array<string>;
+    title: string;
 }
 //#endregion
 
@@ -21,12 +29,12 @@ export class Q2gListAdapter {
     //#region Variables
     obj: Iq2gIListObject;
     itemsCounter: number;
-    type: string
+    type: string;
     //#endregion
 
     //#region collection
-    private _collection: Array<any> = [];
-    get collection(): Array<any> {
+    private _collection: Array<ICollection> = [];
+    get collection(): Array<ICollection> {
         return this._collection;
     }
     //#endregion
@@ -73,7 +81,7 @@ export class Q2gListAdapter {
     //#endregion
 
     /**
-     * init constructor q2gListAdapter 
+     * init constructor q2gListAdapter
      * @param obj object with the specific implementation for Values, Dimension, Bookmarks, ...
      * @param itemsPagingHeight number of items visible on Page
      * @param itemsCounter number of items in the whole list
@@ -198,6 +206,12 @@ export class Q2gDimensionObject extends Event implements Iq2gIListObject {
                 });
         });
     }
+
+    acceptListObjectSearch(toggelMode: boolean): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            resolve(true);
+        });
+    }
 }
 
 export class Q2gListObject extends Event implements Iq2gIListObject {
@@ -233,7 +247,7 @@ export class Q2gListObject extends Event implements Iq2gIListObject {
                         let matrix = item[0];
                         collection.push({
                             status: matrix.qState,
-                            id: matrix.qElemNumber,
+                            id: [matrix.qElemNumber],
                             title: matrix.qText,
                         });
                     }
@@ -258,6 +272,22 @@ export class Q2gListObject extends Event implements Iq2gIListObject {
                 }).catch((e) => {
                     logger.error("error", e);
                     reject();
+                });
+        });
+    }
+
+    /**
+     * Accept the results of a search in a list object. The search results become selected in the field
+     * @param toggelMode Set to true to keep any selections present in the list object.
+     */
+    acceptListObjectSearch(toggelMode: boolean): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            this.model.acceptListObjectSearch("/qListObjectDef", toggelMode)
+                .then(() => {
+                    resolve(true);
+                }).catch((error) => {
+                    logger.error("Error in acceptListObjectSearch", error);
+                    reject(error);
                 });
         });
     }
