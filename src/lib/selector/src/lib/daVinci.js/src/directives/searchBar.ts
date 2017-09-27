@@ -20,13 +20,28 @@ class SearchBarController implements ng.IController {
     textSearch: string = "";
     //#endregion
 
+    //#region theme
+    private _theme: string;
+    get theme(): string {
+        if (this._theme) {
+            return this._theme;
+        }
+        return "default";
+    }
+    set theme(value: string) {
+        if (value !== this._theme) {
+            this._theme = value;
+        }
+    }
+    //#endregion
+    
     static $inject = ["$element", "$scope"];
 
-    /**
+    /** 
      * init of List View Controller
      */
     constructor(element: JQuery, scope: ng.IScope) {
-
+                
         scope.$watch(function () { return element.is(":visible"); }, function () {
             try {
                 if (element.is(":visible")) {
@@ -34,10 +49,10 @@ class SearchBarController implements ng.IController {
                 }
             } catch (e) {
                 logger.error("error in constructor", e);
-            }
+            }          
         });
     }
-
+    
 }
 
 export function SearchBarDirectiveFactory(rootNameSpace: string): ng.IDirectiveFactory {
@@ -52,13 +67,14 @@ export function SearchBarDirectiveFactory(rootNameSpace: string): ng.IDirectiveF
             scope: {},
             bindToController: {
                 textSearch: "=",
-                placeholder: "<"
+                placeholder: "<",
+                theme: "<?"
             },
             compile: function () {
                 checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace, ShortCutDirectiveFactory, "Shortcut");
             }
         };
     };
-}
+        }
 
 

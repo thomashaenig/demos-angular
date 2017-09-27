@@ -1,5 +1,5 @@
-﻿.q2gExtensionHeader .header{
-  width: 100%
+﻿.q2gExtensionHeader .header {
+  width: 100%;
 }
 .q2gExtensionHeader .header tr,
 .q2gExtensionHeader .header td {
@@ -9,7 +9,7 @@
 .q2gExtensionHeader .header .searchObject {
   font-size: 12px;
   text-align: center;
-  color: #ffffff;
+  /*color: #595959;*/
   width: 22px;
   opacity: 0.6;
   margin: auto;
@@ -32,6 +32,15 @@
 }
 .q2gExtensionHeader .header .menutable .normalButton {
   width: 46px !important;
+}
+.q2gExtensionHeader .header .header-theme-inverse {
+  color: #ffffff;
+}
+.q2gExtensionHeader .button-theme-inverse {
+  color: #FFFFFF;
+}
+.q2gExtensionHeader .button-disabled-theme-inverse {
+  opacity: 0.5;
 }
 .q2gExtensionHeader .popOverList {
   background-color: #ffffff;

@@ -1,12 +1,14 @@
 const path = require('path');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractLess = new ExtractTextPlugin("[name].css");
+const extractLess = new ExtractTextPlugin({filename: '[name].css',  
+    allChunks: true
+});
 
 module.exports = {
 	entry: [
 		'./main',
-		'./style'],
+		'./style',],
 
 	output: {
 		filename: '[name].js',
@@ -62,7 +64,7 @@ module.exports = {
 			}
         ]},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.jsx', '.less']},	
+		extensions: ['.ts', '.tsx', '.js', '.jsx', '.less', 'css']},	
 	devServer: {
 		contentBase: path.join(__dirname, "./"),
 		compress: true,

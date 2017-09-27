@@ -27,17 +27,16 @@ export interface IDataModel {
 }
 
 class ListViewController implements ng.IController {
-
+    
     public $onInit(): void {
         this.logger.debug("initial Run of ListViewController");
     }
-
+        
     //#region Variables
     element: JQuery;
     hasFocusSearchField: boolean = false;
     ieItemsReadable: boolean = false;
     itemHeight: number;
-    items: IDataModelItem[];
     itemsCount: number = 0;
     itemsPageHeight: number;
     itemsPageTop: number;
@@ -76,10 +75,35 @@ class ListViewController implements ng.IController {
     }
     //#endregion
 
+    //#region items
+    private _items: IDataModelItem[];
+    get items(): IDataModelItem[] {
+        return this._items;
+    }
+    set items(value: IDataModelItem[]) {
+        this._items = value;
+    }
+    //#endregion
+
+    //#region theme
+    private _theme: string;
+    get theme(): string {
+        if (this._theme) {
+            return this._theme;
+        }
+        return "default";
+    }
+    set theme(value: string) {
+        if (value !== this._theme) {
+            this._theme = value;
+        }
+    }
+    //#endregion
+
 
     static $inject = ["$timeout", "$element"];
 
-    /**
+    /** 
      * init of List View Controller
      * @param timeout angular timeout, to maual trigger dom events
      * @param element element of the List View Controller
@@ -89,7 +113,7 @@ class ListViewController implements ng.IController {
         this.timeout = timeout;
         this.ieItemsReadable = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
     }
-
+    
     /**
      * calculates the new selected Positiion. Focus will will be set out of bounds (root div Element)
      * when the the selectet Value is less then 0 and heigher then the max value
@@ -185,7 +209,7 @@ class ListViewController implements ng.IController {
                 } catch (e) {
                     this.logger.error("Error in shortcutHandler pageDown", e);
                 }
-
+                
             case "enter":
                 this.callbackListviewObjects({ pos: this.itemFocused - this.itemsPageTop});
                 return true;
@@ -229,7 +253,8 @@ export function ListViewDirectiveFactory(rootNameSpace: string): ng.IDirectiveFa
                 itemFocused: "=",
                 showFocused: "<",
                 callbackListviewObjects: "&",
-                overrideShortcuts: "<?"
+                overrideShortcuts: "<?",
+                theme: "<?"
             },
             compile: function () {
                 checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace, ShortCutDirectiveFactory, "Shortcut");
@@ -237,4 +262,4 @@ export function ListViewDirectiveFactory(rootNameSpace: string): ng.IDirectiveFa
             }
         };
     };
-}
+};

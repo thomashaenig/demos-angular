@@ -15,6 +15,12 @@ interface IDefinitionObject {
 }
 
 export interface IRegisterDirective {
+    /**
+    * Register a new directive with the compiler.
+    *
+    * @param name Name of the directive in camel-case (i.e. ngBind which will match as ng-bind)
+    * @param directiveFactory An injectable directive factory function.
+    */
     directive(name: string, directiveFactory: ng.Injectable<ng.IDirectiveFactory>): void;
     directive(object: { [directiveName: string]: ng.Injectable<ng.IDirectiveFactory> }): void;
     filter(name: string, filterFactoryFunction: ng.Injectable<Function>): ng.IModule;
@@ -22,7 +28,7 @@ export interface IRegisterDirective {
 }
 //#endregion
 
-//#region Logger
+//#region Logger 
 let logger = new Logging.Logger("utils");
 //#endregion
 
@@ -40,7 +46,7 @@ export class SimplifierDefinitionObject {
 
     /**
      * recorsive function to generate relevant Object Properties(ref and defaultValue)
-     * @param objectArr Array of stringified Property names
+     * @param objectArr Array of stringified Property names 
      * @param object object of which the property names where stringified
      * @param propName search string for the ref definition of properties
      */
@@ -115,7 +121,7 @@ export function templateReplacer(template: string, rootNameSpace: string) {
  * @param string
  */
 export function regEscaper(string: string) {
-    return string.replace(/[\-\[\]\/\{\}\(\)\+\?\.\\\^\$\|]/g, "\\$&");
+    return string.replace(/[\-\[\]\/\{\}\(\)\+\?\.\\\^\$\|]/g, "\\$&"); 
 }
 
 
@@ -164,14 +170,15 @@ export class AssistHypercube {
 
     constructor(rootCube: any) {
         this.rootCube = rootCube;
-        this.searchListObjectFor("");
+        this.searchListObjectFor("");        
     }
-
+    
     getListObjectData(string: string, qPages: EngineAPI.INxPage): Promise<any> {
 
         return new Promise((resolve, reject) => {
             try {
-                resolve(this.calcCube.slice(qPages[0].qTop, qPages[0].qTop + qPages[0].qHeight));
+                let val = this.calcCube.slice(qPages[0].qTop, qPages[0].qTop + qPages[0].qHeight);
+                resolve(this.calculateDimensionCubeElement(val));
             } catch (e) {
                 console.error("Error in getListObjectData", e);
                 reject(e);
@@ -181,7 +188,6 @@ export class AssistHypercube {
 
 
     }
-
     searchListObjectFor(qMatch: string): Promise<boolean> {
 
         return new Promise((resolve, reject) => {
@@ -211,8 +217,21 @@ export class AssistHypercube {
             }
         });
     }
-}
+    calculateDimensionCubeElement(elements: any) {
 
+        let resElement: Array<any> = [];
+
+        for (let element of elements) {
+            resElement.push({
+                qState: "O",
+                cId: element.cId,
+                qGroupFieldDefs: element.qGroupFieldDefs,
+                qFallbackTitle: element.qFallbackTitle
+            })
+        }
+        return resElement
+    }
+}
 
 /**
  * calculates the number of Visible Rows
@@ -247,7 +266,7 @@ export function getEnigma(scope: IVMScope<any>): EngineAPI.IGenericObject {
  * @param array1
  * @param array2
  */
-export function checkEqualityOfArrays(array1: Array < string >, array2: Array<string>): boolean {
+export function checkEqualityOfArrays(array1: Array <any>, array2: Array<any>, checkOnlyId: boolean): boolean {
     logger.debug("Function checkEqualityOfArrays", "");
 
     try {
@@ -257,8 +276,11 @@ export function checkEqualityOfArrays(array1: Array < string >, array2: Array<st
 
         if (array1 && array2) {
             for (var i: number = 0; i < array1.length; i++) {
+                if (!checkOnlyId && array1[i].id !== array2[i].id) {
+                    return false;
+                }
 
-                if (JSON.stringify(array1[i]).indexOf(JSON.stringify(array2[i])) === -1) {
+                if (checkOnlyId && JSON.stringify(array1[i]).indexOf(JSON.stringify(array2[i])) === -1) {
                     return false;
                 }
             }
@@ -269,6 +291,7 @@ export function checkEqualityOfArrays(array1: Array < string >, array2: Array<st
         return true;
     }
 }
+
 
 function sort(a: any, b: any) {
     if (a.id > b.id) {

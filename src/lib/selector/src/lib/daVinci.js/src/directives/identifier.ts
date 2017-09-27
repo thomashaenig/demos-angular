@@ -12,7 +12,7 @@ class IdentifierController implements ng.IController {
     }
 
     //#region Variables
-    show: boolean;
+    show: boolean; 
     //#endregion
 
     //#region logger
@@ -29,12 +29,27 @@ class IdentifierController implements ng.IController {
     }
     //#endregion
 
+    //#region theme
+    private _theme: string;
+    get theme(): string {
+        if (this._theme) {
+            return this._theme;
+        }
+        return "default";
+    }
+    set theme(value: string) {
+        if (value !== this._theme) {
+            this._theme = value;
+        }
+    }
+    //#endregion
+    
     /**
      * init of AkquinetIdentifierController
      */
     constructor() {
         this.logger.debug("init Constructor", this);
-    }
+    }    
 }
 
 export function IdentifierDirectiveFactory(rootNameSpace: string): ng.IDirectiveFactory {
@@ -48,9 +63,10 @@ export function IdentifierDirectiveFactory(rootNameSpace: string): ng.IDirective
             controllerAs: "vm",
             scope: {},
             bindToController: {
-                show: "<"
+                show: "<",
+                theme: "<?"
             }
         };
     };
-}
+};
 

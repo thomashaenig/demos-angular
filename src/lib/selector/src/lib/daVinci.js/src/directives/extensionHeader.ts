@@ -29,7 +29,7 @@ class ExtensionHeaderController implements ng.IController {
         logger.debug("initial Run of MainMenuController");
     }
 
-    //#region VARIABLES
+    //#region variables
     callbackMainMenuButton: (item: string) => void;
     maxNumberOfElements: number;
     popOverWidth: number = 0;
@@ -45,6 +45,21 @@ class ExtensionHeaderController implements ng.IController {
     private displayList: Array<ListElement> = [];
     private menuListRefactored: Array<ListElement>;
     private popOverList: Array<ListElement> = [];
+    //#endregion
+
+    //#region theme
+    private _theme: string;
+    get theme(): string {
+        if (this._theme) {
+            return this._theme;
+        }
+        return "default";
+    }
+    set theme(value: string) {
+        if (value !== this._theme) {
+            this._theme = value;
+        }
+    }
     //#endregion
 
     //#region showButtons
@@ -66,22 +81,26 @@ class ExtensionHeaderController implements ng.IController {
     private _menuList: Array<any>;
     get menuList(): Array<any> {
         return this._menuList;
-    }
+    };
     set menuList(value: Array<any>) {
-        if (this._menuList !== value) {
-            try {
-                this._menuList = value;
-                this.listRefactoring(value);
-            } catch (e) {
-                logger.error("Error in setter of menuList");
+        logger.debug("menuList change", value);
+        try {
+            // workaround
+            if (typeof value === "string") {
+                value = JSON.parse(value);
             }
+            // end workaround
+            this._menuList = value;
+            this.listRefactoring(value);
+        } catch (e) {
+            logger.error("Error in setter of menuList");
         }
-    }
+    };
     //#endregion
 
     static $inject = ["$timeout", "$element", "$scope"];
 
-    /**
+    /** 
      * init of List View Controller
      * @param element element of the List View Controller
      * @param scope scope element to get the watcher in class
@@ -96,7 +115,7 @@ class ExtensionHeaderController implements ng.IController {
             return this.element.width();
         }, () => {
             this.calcLists();
-        });
+        });        
     }
 
     /**
@@ -118,9 +137,14 @@ class ExtensionHeaderController implements ng.IController {
 
                 this.menuListRefactored.push(assistElement);
             }
+
+            if (this.element) {
+                this.calcLists();
+            }
+            
         } catch (e) {
             logger.error("error in listRefactoring", e);
-        }
+        }        
     }
 
     /**
@@ -131,7 +155,6 @@ class ExtensionHeaderController implements ng.IController {
         let counter: number = 0;
         this.displayList = [];
         this.popOverList = [];
-
         try {
             for (let x of this.menuListRefactored) {
                 counter++;
@@ -140,7 +163,7 @@ class ExtensionHeaderController implements ng.IController {
                 } else {
                     this.popOverList.push(x);
                 }
-            }
+            }            
         } catch (e) {
             logger.error("error in calcLists", e);
         }
@@ -167,8 +190,9 @@ export function ExtensionHeaderDirectiveFactory(rootNameSpace: string): ng.IDire
                 showSearchField: "=",
                 title: "<",
                 shortcutSearchfield: "<",
+                theme: "<?"
             },
-            compile: function () {
+            compile: function () {                        
                 checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
                         SearchBarDirectiveFactory(rootNameSpace), "SearchBar");
                 checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace, ShortCutDirectiveFactory, "Shortcut");
